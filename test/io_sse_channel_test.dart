@@ -31,10 +31,8 @@ void main() {
         unawaited(_serveSequence(server, lastEventHeaders, secondRequest));
 
         final channel = SseChannel.connect(serverUri);
-        final messagesFuture = channel.stream
-            .take(2)
-            .map((event) => event.data)
-            .toList();
+        final messagesFuture =
+            channel.stream.take(2).map((event) => event.data).toList();
 
         final messages = await messagesFuture.timeout(
           const Duration(seconds: 2),
